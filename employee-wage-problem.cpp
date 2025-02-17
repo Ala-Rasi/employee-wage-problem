@@ -7,6 +7,7 @@ const int WAGE_PER_HOUR = 20;
 const int FULL_DAY_HOUR = 8;
 const int PART_TIME_HOUR = 8;
 const int WORKING_DAYS_PER_MONTH = 20;
+const int MAX_HOURS = 100;
 
 // UC1: Check Employee Attendance for a single day
 int checkAttendance() {
@@ -73,6 +74,23 @@ void calculateMonthlyWage() {
     cout << "Total Monthly Employee Wage: " << monthlyWage << endl;
 }
 
+// UC6: Calculate Wages till total working hours or days condition is met
+void calculateConditionalWage() {
+    int totalHours = 0, totalDays = 0, totalWage = 0;
+    for (int i = 0; i < WORKING_DAYS_PER_MONTH && totalHours < MAX_HOURS; i++) {
+        if (attendance[i] == 1) {
+            totalHours += FULL_DAY_HOUR;
+            totalWage += WAGE_PER_HOUR * FULL_DAY_HOUR;
+            totalDays++;
+        }
+    }
+    cout<<"Total Hours Accumulated: "<<totalHours<<endl;
+    if (totalHours >= MAX_HOURS)
+        cout << "Maximum working hours reached. Total Employee Wage: " << totalWage << endl;
+    else
+        cout << "Working hours not yet reached. Total Wage so far: " << totalWage << endl;
+}
+
 int main() {
     cout << "Welcome to Employee Wage Computation Program on Master Branch" << endl;
     srand(time(0));
@@ -92,6 +110,9 @@ int main() {
 
     //UC5
     calculateMonthlyWage();
+
+    //UC6
+    calculateConditionalWage();
     
     return 0;
 }
