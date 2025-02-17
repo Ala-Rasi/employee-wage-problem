@@ -91,6 +91,21 @@ void calculateConditionalWage() {
         cout << "Working hours not yet reached. Total Wage so far: " << totalWage << endl;
 }
 
+// UC7: Refactor using Class
+class EmployeeWageCalculator {
+public:
+    void computeWages() {
+        int empStatus = checkAttendance();
+        cout << (empStatus == 1 ? "Employee is Present" : "Employee is Absent") << endl;
+        
+        int fullTimeWage = calculateDailyWage(empStatus);
+        int partTimeWage = calculatePartTimeWage(empStatus);
+        displayWage(empStatus, fullTimeWage, partTimeWage);
+        calculateMonthlyWage();
+        calculateConditionalWage();
+    }
+};
+
 int main() {
     cout << "Welcome to Employee Wage Computation Program on Master Branch" << endl;
     srand(time(0));
@@ -113,6 +128,11 @@ int main() {
 
     //UC6
     calculateConditionalWage();
+
+    //UC7
+    cout<<"UC7 (using classes): "<<endl;
+    EmployeeWageCalculator empWage;
+    empWage.computeWages();
     
     return 0;
 }
