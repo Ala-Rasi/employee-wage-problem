@@ -32,6 +32,29 @@ int calculatePartTimeWage(int empStatus) {
     return WAGE_PER_HOUR * PART_TIME_HOUR;
 }
 
+// UC4: Display results using Switch Case
+void displayWage(int empStatus, int fullTimeWage, int partTimeWage) {
+    int choice;
+    cout << "Select option to display: \n1. Employee Attendance \n2. Full-time Wage \n3. Part-time Wage \n";
+    cout<<"Your choice: ";
+    cin >> choice;
+    switch (choice) {
+        case 1:
+            cout << (empStatus == 1 ? "Employee is Present" : "Employee is Absent") <<
+            endl;
+            break;
+        case 2:
+            cout << "Daily Full-time Wage: " << fullTimeWage << endl;
+            break;
+        case 3:
+            cout << "Daily Part-time Wage: " << partTimeWage << endl;
+            break;
+        
+        default:
+            cout << "Invalid choice!" << endl;
+    }
+}
+
 int main() {
     cout << "Welcome to Employee Wage Computation Program on Master Branch" << endl;
     srand(time(0));
@@ -45,6 +68,9 @@ int main() {
 
     //UC3
     int partTimeWage=calculatePartTimeWage(empStatus);
+
+    //UC4
+    displayWage(empStatus, fullTimeWage, partTimeWage);
     
     return 0;
 }
