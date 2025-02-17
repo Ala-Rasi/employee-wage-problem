@@ -5,6 +5,7 @@ using namespace std;
 
 const int WAGE_PER_HOUR = 20;
 const int FULL_DAY_HOUR = 8;
+const int PART_TIME_HOUR = 8;
 
 // UC1: Check Employee Attendance for a single day
 int checkAttendance() {
@@ -21,6 +22,16 @@ int calculateDailyWage(int empStatus) {
     return WAGE_PER_HOUR * FULL_DAY_HOUR;
 }
 
+// UC3: Calculate Part-time Employee Wage
+int calculatePartTimeWage(int empStatus) {
+    if (empStatus == 0) {
+        cout << "Employee is Absent. No wage calculated." << endl;
+        return 0;
+    }
+    cout<<"Part-time Wages: "<<WAGE_PER_HOUR * PART_TIME_HOUR<<endl;
+    return WAGE_PER_HOUR * PART_TIME_HOUR;
+}
+
 int main() {
     cout << "Welcome to Employee Wage Computation Program on Master Branch" << endl;
     srand(time(0));
@@ -31,6 +42,9 @@ int main() {
 
     //UC2
     int fullTimeWage=calculateDailyWage(empStatus);
+
+    //UC3
+    int partTimeWage=calculatePartTimeWage(empStatus);
     
     return 0;
 }
