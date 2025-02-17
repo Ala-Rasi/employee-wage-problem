@@ -6,6 +6,7 @@ using namespace std;
 const int WAGE_PER_HOUR = 20;
 const int FULL_DAY_HOUR = 8;
 const int PART_TIME_HOUR = 8;
+const int WORKING_DAYS_PER_MONTH = 20;
 
 // UC1: Check Employee Attendance for a single day
 int checkAttendance() {
@@ -55,6 +56,23 @@ void displayWage(int empStatus, int fullTimeWage, int partTimeWage) {
     }
 }
 
+// Shared Monthly Attendance Array
+int attendance[WORKING_DAYS_PER_MONTH];
+
+// UC5: Generate Monthly Attendance and Calculate Wages
+void calculateMonthlyWage() {
+    int monthlyWage = 0;
+    for (int i = 0; i< WORKING_DAYS_PER_MONTH; i++) {
+        attendance[i] = checkAttendance();
+    }
+    for (int i = 0; i < WORKING_DAYS_PER_MONTH; i++) {
+        if (attendance[i] == 1) {
+            monthlyWage += WAGE_PER_HOUR * FULL_DAY_HOUR;
+        }
+    }
+    cout << "Total Monthly Employee Wage: " << monthlyWage << endl;
+}
+
 int main() {
     cout << "Welcome to Employee Wage Computation Program on Master Branch" << endl;
     srand(time(0));
@@ -71,6 +89,9 @@ int main() {
 
     //UC4
     displayWage(empStatus, fullTimeWage, partTimeWage);
+
+    //UC5
+    calculateMonthlyWage();
     
     return 0;
 }
